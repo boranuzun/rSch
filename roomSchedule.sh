@@ -4,7 +4,7 @@ echo -n "Afficher dans le terminal (t) ou dans le navigateur (n) ? "; read -r ch
 echo -n "Choisir la salle: "; read -r salleNom
 
 if [ "$choix" = "t" ]; then
-    curl -s https://www.hesge.ch/heg/salle/"$salleNom" | pup ':contains("Horaire"), p text{}'
+    curl -s https://www.hesge.ch/heg/salle/"$salleNom" | pup 'p text{}'
     room=$(curl -s https://www.hesge.ch/heg/salle/"$salleNom" | pup ':contains("Salle") text{}')
 
     if [ "$room" = "Salle occupée" ]; then
