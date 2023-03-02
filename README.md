@@ -30,3 +30,8 @@ chmod +x roomSchedule.sh
 ```bash
 ./roomSchedule.sh
 ```
+
+<br>
+<div align=right>
+<p style="font-style: italic">As of now, there is no error handling in the script.</p>
+</div>
