@@ -28,5 +28,5 @@ chmod +x roomSchedule.sh
 **4. Run the script**
 
 ```bash
-./roomSchedule.sh
+./roomSchedule.sh -h
 ```
