@@ -16,26 +16,31 @@
 
 # Main script logic
 on run argv
-    set roomName to item 1 of argv
+    set inputRoom to item 1 of argv
+    # Convert input to uppercase
+    set roomName to do shell script "echo " & quoted form of inputRoom & " | tr '[:lower:]' '[:upper:]'"
     set roomURL to "https://www.hesge.ch/heg/salle/" & roomName
-    set roomStatus to do shell script "curl -s " & roomURL & " | pup ':contains(\"Salle\") text{}'"
+
+    # Fetch room status
+    set roomStatus to do shell script "curl -s " & quoted form of roomURL & " | pup ':contains(\"Salle\") text{}'"
 
     if roomStatus is "" then
-        return "Error: Could not retrieve room status."
+        return "❌ Could not retrieve room status."
     end if
 
     # Format the room status for readability
     if roomStatus contains "occupée" then
-        set formattedRoomStatus to "Room Status: OCCUPIED\n"
+        set formattedRoomStatus to "📕 Room Status: OCCUPIED\n"
     else
-        set formattedRoomStatus to "Room Status: AVAILABLE\n"
+        set formattedRoomStatus to "📗 Room Status: AVAILABLE\n"
     end if
 
-    set additionalInfo to do shell script "curl -s " & roomURL & " | pup 'p text{}'"
+    # Fetch additional info
+    set additionalInfo to do shell script "curl -s " & quoted form of roomURL & " | pup 'p text{}'"
 
     if additionalInfo is "" then
-        return "Error: Could not retrieve additional information."
+        return "❌ Could not retrieve additional information."
     end if
 
-    return formattedRoomStatus & "\nAdditional Information:\n" & additionalInfo
+    return formattedRoomStatus & "\n📝 Additional Information:\n" & additionalInfo
 end run
