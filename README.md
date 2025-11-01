@@ -1,5 +1,9 @@
 # rSch
 
+> ⚠️ ARCHIVED — This project is no longer maintained.
+>
+> Last updated: 1 November 2025
+
 Bash script that displays the given room's schedule.
 
 ## How to use
